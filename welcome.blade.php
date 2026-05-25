@@ -37,9 +37,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ url('/') }}">Beranda</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/informasi') }}">Informasi</a>
-                    </li>
+                   <!--li class="nav-item">
+                        <!a class="nav-link" href="{{ url('/informasi') }}">Informasi</a>
+                    </li -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('beritapengunjung.index') }}">Berita</a>
                     </li>
@@ -90,8 +90,8 @@
                         <div class="carousel-item">
                             <img src="{!! \Storage::url($secondBanner->gambar) !!}" class="d-block w-100" alt="Canyon at Nigh" />
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <h5>  </h5>
+                                <p> </p>
                             </div>
                         </div>
 
@@ -100,8 +100,8 @@
                             <img src="{!! \Storage::url($thirdBanner->gambar) !!}" class="d-block w-100"
                                 alt="Cliff Above a Stormy Sea" />
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                <h5></h5>
+                                <p></p>
                             </div>
                         </div>
                     </div>
@@ -121,13 +121,36 @@
                 </div>
             </div>
             <div class="col-md-4 order-md p-4">
-                <h3 class="display-9 fw-bold mt-3">Selamat datang di Website Literasi Kunangan.id</h3>
-                <p>Literasi Desa Kunangan merupakan salah satu Program Inovasi Desa (Pro-IDE) dari tim PRO IDE HIMIP.
+                <h3 class="display-9 fw-bold mt-3">Selamat datang di Website Literasi Kunangan.web.id</h3>
+                <p>Literasi Desa Kunangan adalah program pemberdayaan masyarakat yang bertujuan meningkatkan budaya baca dan akses informasi melalui layanan pojok baca, buku digital, serta kegiatan edukatif.
                 </p>
             </div>
         </div>
     </div>
     <!-- End Carousel-->
+    
+    <section class="search-section py-4">
+        <div class="container">
+            <div class="search-wrapper">
+                <div class="search-tabs">
+                    <button class="search-tab-btn active" onclick="switchTab(this, 'lokasi')">Lokasi</button>
+                    <button class="search-tab-btn" onclick="switchTab(this, 'buku')">Buku</button>
+                </div>
+                <form action="{{ route('hasil.pencarian') }}" method="GET">
+                    <input type="hidden" name="tipe" id="inputTipe" value="lokasi">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" name="q" id="searchInput" class="search-input"
+                            placeholder="Cari lokasi pojok literasi..." autocomplete="off" required>
+                        <button type="submit" class="search-btn">Cari</button>
+                    </div>
+                </form>
+                <div class="search-hint">
+                    <span id="searchHintText">Temukan pojok literasi terdekat di Desa Kunangan</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!--Jumbotron-->
     <section class="p-3">
@@ -212,6 +235,109 @@
         #pndp:hover {
             transform: scale(1.05);
         }
+        .search-section {
+            border-top: 20px;
+            border-bottom: 1px;
+        }
+
+        .search-wrapper {
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-tabs {
+            display: inline-flex;
+            background: #fff;
+            border-radius: 50px;
+            padding: 4px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            gap: 4px;
+        }
+
+        .search-tab-btn {
+            border: none;
+            background: transparent;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .search-tab-btn.active {
+            background: #f8d65b;
+            color: #333;
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(248, 214, 91, 0.5);
+        }
+
+        .search-tab-btn:hover:not(.active) {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 50px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            overflow: hidden;
+            transition: box-shadow 0.25s ease;
+        }
+
+        .search-input-wrapper:focus-within {
+            box-shadow: 0 4px 20px rgba(248, 214, 91, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            color: #aaa;
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 14px 20px 14px 48px;
+            font-size: 0.95rem;
+            color: #333;
+            background: transparent;
+        }
+
+        .search-input::placeholder {
+            color: #bbb;
+        }
+
+        .search-btn {
+            border: none;
+            background: #f8d65b;
+            color: #333;
+            font-weight: 700;
+            padding: 14px 28px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background: #f5c800;
+        }
+
+        .search-hint {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #999;
+        }
     </style>
     <!-- Card Buku Start -->
 
@@ -226,7 +352,7 @@
                     <h1 class="display-4 fw-bold">
                         <i class="fa-solid fa-book fa-2xl bounce mt-5" style="color: #f8d65b;"></i>
                     </h1>
-                    <p class="p-3">Koleksi Populer Kami</p>
+                    <p class="p-3">Koleksi Terbaru Kami</p>
                     <!-- <p clas="lead" id="typed-text"> -->
                     <!-- </p> -->
                 </div>
@@ -236,6 +362,7 @@
     <!--End Jumbotron-->
 
     <!-- Start Buku buku 1 -->
+    <!--
     <section class="container">
         <h4> Popular among our collections. </h4>
         <small class="subtitle-section"> Our library's line of collection that have been favoured by our users were
@@ -250,14 +377,15 @@
                                         <img src="{!! \Storage::url($item->foto) !!}" class="card-img-top" alt="{{ $item->judul }}">
                                     @endif
                                     <p class="card-text mt-2">{{ $item->judul }}</p>
-                                    <p class="card-text mt-2">lokasi{{ $item->lokasi_id }}</p>
+                                    <p class="card-text mt-2">{{ $item->lokasi->lokasi }}</p>
                                 </div>
                             </a>
                         </div>
                     </div>
                 @endforeach
             </div>
-    </section>
+    </section> 
+    -->
     <!-- End Buku buku 1 -->
 
     <!-- Start Buku buku 2 -->
@@ -276,7 +404,7 @@
                                     <img src="{!! \Storage::url($item->foto) !!}" class="card-img-top" alt="{{ $item->judul }}">
                                 @endif
                                 <p class="card-text mt-2">{{ $item->judul }}</p>
-                                <p class="card-text mt-2">lokasi{{ $item->lokasi_id }}</p>
+                                <p class="card-text mt-2">{{ $item->lokasi->lokasi }}</p>
                             </div>
                         </a>
                     </div>
@@ -287,8 +415,9 @@
 
     <!-- End Buku buku 2 -->
 
+    <!-- closd--)>
     <!-- Top reader start -->
-    <section id="bgtr">
+    <!-- <section id="bgtr">
         <div class="container-fluid bg-image mt-3">
             <h3 class="section">
                 Top Reader of the week
@@ -297,7 +426,6 @@
                     <div class="rounded-image">
                         <img src="{{ asset('kunangan') }}/img/g.jpeg" alt="Image 1">
                         <p class="image-text1"> Boy</p>
-
                     </div>
                     <div class="rounded-image">
                         <img src="{{ asset('kunangan') }}/img/hij.jpg" alt="Image 2">
@@ -310,39 +438,33 @@
                 </div>
             </h3>
         </div>
-    </section>
+    </section> -->
     <!-- Top reader end -->
 
     <!--contact-->
     <section class="p-5" id="contact">
         <div class="container">
             <div class="mb-3 row text-center">
-                <h1>Contact Us</h1>
+                <h1>Donasi</h1>
+                <p>Kirim ke mailbox kami</p>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <form>
+                    <form method="POST" action="{{ route('donasi.store') }}">
+                        @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
+                            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-
-                        <div class="mb-3 form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Sumbangan anda sangat berarti
-                                bagi kami.</label>
+                            <label for="exampleFormControlTextarea1" class="form-label">Pesan</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="pesan" rows="3"></textarea>
                         </div>
 
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -391,7 +513,7 @@
         </div>
 
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            ©2023 Copyright: Pro-IDE HIMIP
+             Copyright: Literasi Kunangan
         </div>
 
     </footer>
@@ -441,6 +563,23 @@
         const jumbotron = document.querySelector(".jumbotron");
         jumbotron.style.display = "block";
     });
+
+    function switchTab(el, type) {
+        document.querySelectorAll('.search-tab-btn').forEach(btn => btn.classList.remove('active'));
+        el.classList.add('active');
+
+        document.getElementById('inputTipe').value = type;
+
+        const input = document.getElementById('searchInput');
+        const hint  = document.getElementById('searchHintText');
+        if (type === 'lokasi') {
+            input.placeholder = 'Cari lokasi pojok literasi...';
+            hint.textContent  = 'Temukan pojok literasi terdekat di Desa Kunangan';
+        } else {
+            input.placeholder = 'Cari judul buku, pengarang...';
+            hint.textContent  = 'Cari koleksi buku yang tersedia di seluruh pojok literasi';
+        }
+    }
 </script>
 
 <!-- <script>
